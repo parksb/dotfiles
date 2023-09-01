@@ -1,0 +1,24 @@
+set number relativenumber
+set cursorline
+set title
+set showmatch
+set showmode
+set hlsearch
+set incsearch
+set noimd
+
+Plug 'terryma/vim-multiple-cursors'
+Plug 'preservim/nerdtree'
+Plug 'machakann/vim-highlightedyank'
+
+let g:highlightedyank_highlight_duration = "-1"
+
+map <C-N>  <A-N>
+map <C-P>  <A-P>
+map <C-X>  <A-X>
+map g<C-N> g<A-N>
+
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gy :action GotoTypeDeclaration<CR>
+
+"source ~/.vimrc

@@ -1,0 +1,25 @@
+{
+  "name": "lib",
+  "dependencies": {
+    "bash-language-server": {
+      "version": "4.1.0",
+      "overridden": false
+    },
+    "corepack": {
+      "version": "0.12.1",
+      "overridden": false
+    },
+    "korean-ls": {
+      "version": "0.1.5",
+      "overridden": false
+    },
+    "npm": {
+      "version": "9.2.0",
+      "overridden": false
+    },
+    "pm2": {
+      "version": "5.3.0",
+      "overridden": false
+    }
+  }
+}

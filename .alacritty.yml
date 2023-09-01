@@ -1,0 +1,78 @@
+env:
+  TERM: xterm-256color
+
+window:
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: true
+
+# Font configuration
+font:
+  normal:
+    family: RobotoMono Nerd Font
+    style: Regular
+  bold:
+    family: RobotoMono Nerd Font
+    style: SemiBold
+  italic:
+    family: RobotoMono Nerd Font
+    style: Italic
+  bold_italic:
+    family: RobotoMono Nerd Font
+    style: SemiBold Italic
+  size: 14
+  offset:
+    y: 2
+  glyph_offset:
+    y: 1
+
+# Colors (Dracula)
+colors:
+  cursor:
+    text: CellBackground
+    cursor: CellForeground
+  primary:
+    background: '#282a36'
+    foreground: '#f8f8f2'
+    dim_foreground: '#9a9a9a'
+    bright_foreground: '#ffffff'
+  normal:
+    black: '#000000'
+    red: '#ff5555'
+    green: '#50fa7b'
+    yellow: '#f1fa8c'
+    blue: '#bd93f9'
+    magenta: '#ff79c6'
+    cyan: '#8be9fd'
+    white: '#bfbfbf'
+  bright:
+    black: '#4d4d4d'
+    red: '#ff6e67'
+    green: '#5af78e'
+    yellow: '#f4f99d'
+    blue: '#caa9fa'
+    magenta: '#ff92d0'
+    cyan: '#9aedfe'
+    white: '#e6e6e6'
+  dim:
+    black: '#14151b'
+    red: '#ff2222'
+    green: '#1ef956'
+    yellow: '#ebf85b'
+    blue: '#4d5b86'
+    magenta: '#ff46b0'
+    cyan: '#59dffc'
+    white: '#e6e6d1'
+  indexed_colors: []
+
+selection:
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+# Visual bell
+bell:
+  animation: EaseOutQuart
+  color: '#ffffff'
+  duration: 100
