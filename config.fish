@@ -149,4 +149,6 @@ if test -e ~/projects; set -gx PROJECT_DIR ~/projects; end
 if test -e ~/projects; set -gx TEX_PREAMBLES_DIR ~/Documents/TeX/preambles; end
 
 # theme
-fish_config theme choose "Dracula Official"
+if test -e "~/.config/fish/themes/Dracula Official.theme"
+  fish_config theme choose "Dracula Official"
+end
