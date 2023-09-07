@@ -4,6 +4,8 @@
     > [!IMPORTANT]
     > 파이썬이 설치되어 있어야 한다.
 2. caps lock 비활성화 및 한영 전환키를 caps lock으로 설정.
+    1. caps lock을 hyper key로 설정: `gnome-tweaks` > Keyboard & Mouse > Additional Layout Options > Caps Lock behavior > Make Caps Lock an additional Hyper 체크.
+    2. 한영 전환키를 hyper key로 설정: Settings > Keyboard > Korean (Hangul) Preferences > Hangul Toggle Key Add.
 3. 하이버네이트 활성화: https://linuxhint.com/enable-hibernate-ubuntu-22-04-lts/
     1. 스왑 파티션 사이즈가 메모리 사이즈와 같거나 커야 한다. 작다면 스왑 사이즈를 늘려야 한다.
         ```
