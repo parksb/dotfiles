@@ -20,6 +20,7 @@
   - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
   - `prefix` + `I`
 - neovim: https://neovim.io/
+  - 0.9 버전 이상(unstable)을 설치하도록 한다.
 - vim-plug: https://github.com/junegunn/vim-plug#installation
 
 ### Development
