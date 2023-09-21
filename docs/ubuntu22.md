@@ -3,6 +3,7 @@
 1. macOS 스타일로 키매핑: https://github.com/rbreaves/kinto#how-to-install-linux
     > [!IMPORTANT]
     > 파이썬이 설치되어 있어야 한다.
+    - `gnome-tweak` > Keyboard & Mouse > Overview Shortcut을 Right Super로 변경.
 2. caps lock 비활성화 및 한영 전환키를 caps lock으로 설정.
     1. caps lock을 hyper key로 설정: `gnome-tweaks` > Keyboard & Mouse > Additional Layout Options > Caps Lock behavior > Make Caps Lock an additional Hyper 체크.
     2. 한영 전환키를 hyper key로 설정: Settings > Keyboard > Korean (Hangul) Preferences > Hangul Toggle Key Add.
