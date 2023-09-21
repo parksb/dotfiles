@@ -81,6 +81,13 @@ if type -q pyenv
   fish_add_path_if_exists $PYENV_ROOT/bin
   pyenv init - | source
 end
+
+if type -q pipenv
+  alias pvr='pipenv run'
+  alias pvi='pipenv install'
+  alias pvs='pipenv shell'
+end
+
 alias_if_exists python 'py' 'python'
 
 # docker
