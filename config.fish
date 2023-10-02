@@ -26,6 +26,7 @@ alias vimconf='v ~/.vimrc'
 alias nvimconf='v ~/.config/nvim/init.vim'
 alias tmuxconf='v ~/.tmux.conf'
 alias alacrittyconf='v ~/.alacritty.yml'
+alias weztermconf='v ~/.config/wezterm/wezterm.lua'
 alias fishconf='v ~/.config/fish/config.fish'
 
 # coreutils alternatives
@@ -133,6 +134,7 @@ alias_if_exists trash 'rm' 'trash'
 alias_if_exists mycli 'sql' 'mycli'
 alias_if_exists z 'j' 'z'
 alias_if_exists imgcat 'img' 'imgcat'
+alias_if_exists wezterm 'img' 'wezterm imgcat'
 alias_if_exists npx 'ts' 'npx tsx'
 alias_if_exists npx 'marp' 'npx @marp-team/marp-cli@latest'
 
