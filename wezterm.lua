@@ -2,8 +2,11 @@ local wezterm = require "wezterm"
 local config = {}
 
 -- font
-config.font = wezterm.font("RobotoMono Nerd Font", { weight = "Medium" })
-config.font_size = 13
+config.font = wezterm.font_with_fallback {
+  { family = 'RobotoMono Nerd Font', weight = 'Medium' },
+  { family = 'NanumGothicCoding', weight = 'Regular' },
+}
+config.font_size = 14
 
 -- padding
 config.window_padding = {
@@ -13,12 +16,15 @@ config.window_padding = {
   bottom = 0,
 }
 
--- theme
+-- appearance and theme
 config.color_scheme_dirs = { "~/.config/wezterm" }
 config.color_scheme = "Dracula (Official)"
 config.use_fancy_tab_bar = false
-config.window_decorations = "RESIZE"
-config.colors = { visual_bell = "#f8f8f2" }
+config.tab_bar_at_bottom = true
+config.window_decorations = "TITLE | RESIZE"
+config.hide_tab_bar_if_only_one_tab = true
+config.window_background_opacity = 0.8
+config.force_reverse_video_cursor = true
 
 -- visual bell
 config.visual_bell = {
@@ -27,24 +33,15 @@ config.visual_bell = {
   fade_out_function = 'EaseOut',
   fade_out_duration_ms = 50,
 }
+config.colors = { visual_bell = "#f8f8f2" }
 
 -- keymap
 config.keys = {
-  {
-    key = 'l',
-    mods = 'CMD',
-    action = wezterm.action.SplitPane({ direction = "Right" }),
-  },
-  {
-    key = 'm',
-    mods = 'CMD',
-    action = wezterm.action.SplitPane({ direction = "Down" }),
-  },
-  {
-    key = 'o',
-    mods = 'CMD',
-    action = wezterm.action.ActivatePaneDirection "Next",
-  },
+  { key = 'n', mods = 'CMD', action = wezterm.action.ActivateTabRelativeNoWrap(1) },
+  { key = 'p', mods = 'CMD', action = wezterm.action.ActivateTabRelativeNoWrap(-1) },
+  { key = 'l', mods = 'CMD', action = wezterm.action.SplitPane({ direction = "Right" }) },
+  { key = 'j', mods = 'CMD', action = wezterm.action.SplitPane({ direction = "Down" }) },
+  { key = 'o', mods = 'CMD', action = wezterm.action.ActivatePaneDirection("Next") },
 }
 
 return config
