@@ -4,7 +4,6 @@ set shiftwidth=2 " 쉬프트를 2칸으로 설정한다.
 set tabstop=2 " 탭을 2칸으로 설정한다.
 set ts=2 " 탭 들여쓰기를 2칸으로 설정한다.
 set nu " 줄 번호를 보여준다
-set cursorline " 커서 위치를 보여준다.
 set title " 문서 제목을 보여준다.
 set showmatch " 괄호의 짝을 강조한다.
 set noshowmode " 상태바 아래에 현재 모드를 보여주지 않는다.
@@ -485,8 +484,10 @@ EOF
 " indent-blankline.nvim
 " ========================
 lua << EOF
-require("indent_blankline").setup {
-  show_current_context = true,
+require("ibl").setup {
+  exclude = { filetypes = { "markdown" } },
+  indent = { char = "▏" },
+  scope = { show_start = false, show_end = false },
 }
 EOF
 
