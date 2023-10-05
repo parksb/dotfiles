@@ -4,9 +4,9 @@ local config = {}
 -- font
 config.font = wezterm.font_with_fallback {
   { family = 'RobotoMono Nerd Font', weight = 'Medium' },
-  { family = 'NanumGothicCoding', weight = 'Regular' },
+  { family = 'NanumGothicCoding', weight = 'Bold' },
 }
-config.font_size = 14
+config.font_size = 13
 
 -- padding
 config.window_padding = {
