@@ -11,7 +11,7 @@
 ### Basics
 
 - git: https://git-scm.com/
-- alacritty: https://github.com/alacritty/alacritty/blob/master/INSTALL.md
+- wezterm: https://wezfurlong.org/wezterm/installation
 - fish: https://fishshell.com/
 - fisher: https://github.com/jorgebucaran/fisher#installation
   - `cat "~/.dotfiles/packages/fisher_list" | fisher install`
@@ -68,8 +68,8 @@
 > ln -s $DOTFILES_DIR/.gitconfig ~/.gitconfig
 > ln -s $DOTFILES_DIR/.delta-themes.gitconfig ~/.delta-themes.gitconfig
 
-# alacritty
-> ln -s $DOTFILES_DIR/.alacritty.yml ~/.alacritty.yml
+# wezterm
+> ln -s $DOTFILES_DIR/wezterm.lua ~/.config/wezterm/wezterm.lua
 
 # fish
 > ln -s $DOTFILES_DIR/config.fish ~/.config/fish/config.fish
