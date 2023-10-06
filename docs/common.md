@@ -70,6 +70,7 @@
 
 # wezterm
 > ln -s $DOTFILES_DIR/wezterm.lua ~/.config/wezterm/wezterm.lua
+> ln -s $DOTFILES_DIR/wezterm-dracula.toml ~/.config/wezterm/wezterm-dracula.toml
 
 # fish
 > ln -s $DOTFILES_DIR/config.fish ~/.config/fish/config.fish
