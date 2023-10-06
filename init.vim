@@ -281,6 +281,7 @@ let g:coc_global_extensions = [
       \ 'coc-tsserver',
       \ 'coc-html',
       \ 'coc-vimlsp',
+      \ 'coc-svelte',
       \ ]
 " <TAB> - 현재 문자에 대한 자동완성을 트리거링한다.
 inoremap <silent><expr> <TAB>
