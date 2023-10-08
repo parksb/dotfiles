@@ -58,3 +58,10 @@
         ```
     9. GNOME 익스텐션 매니저 앱을 설치한다: `sudo apt install gnome-shell-extension-manager`
     10. 앱을 열고 "Hibernate Status Button" 익스텐션을 설치한 뒤 재부팅한다.
+4. SSH 서버 설정 (`/etc/ssh/sshd_config`):
+  1. 비밀번호 인증 비활성화: `PasswordAuthentication no`
+  2. root 계정 접근 차단: `PermitRootLogin no`
+  3. X11 포워딩: `X11Forwarding yes`
+    - 리모트에서는 `ssh -X user@hostname`으로 접속.
+    - macOS: [XQuartz](https://www.xquartz.org/)
+  4. SSH 서버 재실행: `systemctl restart sshd`
