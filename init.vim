@@ -86,10 +86,9 @@ au TextYankPost * silent! lua vim.highlight.on_yank { timeout = 2000 }
 " ========================
 " Lua 전역
 " ========================
-lua filetype = vim.bo.filetype
-lua isTexFile = filetype == 'plaintex' or filetype == 'latex'
-lua isArticleFile = isTexFile or filetype == 'markdown'
 lua << EOF
+vim.loader.enable()
+
 function ternary(condition, a, b)
   if condition then
     return a
@@ -97,8 +96,21 @@ function ternary(condition, a, b)
     return b
   end
 end
+
+function has(a, x)
+  for i, v in ipairs(a) do
+    if v == x then
+      return true
+    end
+  end
+  return false
+end
+
+filetype = vim.bo.filetype
+textFiletypes = {"plaintex", "latex", "markdown"}
+isTexFile = filetype == "plaintex" or filetype == "latex"
+isArticleFile = isTexFile or filetype == "markdown"
 EOF
-lua vim.loader.enable()
 
 " ========================
 " vim-plug
@@ -260,8 +272,13 @@ EOF
 " dracula
 " ========================
 set termguicolors
-colorscheme dracula
-au BufEnter *.md,*.tex colorscheme onehalflight
+lua << EOF
+  if has(textFiletypes, filetype) then
+    vim.cmd("colorscheme onehalflight")
+  else
+    vim.cmd("colorscheme dracula")
+  end
+EOF
 
 " ========================
 " coc.nvim
@@ -486,7 +503,6 @@ EOF
 " ========================
 lua << EOF
 require("ibl").setup {
-  exclude = { filetypes = { "markdown" } },
   indent = { char = "▏" },
   scope = { show_start = false, show_end = false },
 }
