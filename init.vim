@@ -273,11 +273,11 @@ EOF
 " ========================
 set termguicolors
 lua << EOF
-  if has(textFiletypes, filetype) then
-    vim.cmd("colorscheme onehalflight")
-  else
-    vim.cmd("colorscheme dracula")
-  end
+if has(textFiletypes, filetype) then
+  vim.cmd("colorscheme onehalflight")
+else
+  vim.cmd("colorscheme dracula")
+end
 EOF
 
 " ========================
@@ -481,6 +481,15 @@ EOF
 " ========================
 " nvim-surround
 " ========================
+" Old text                    Command         New text
+" -----------------------------------------------------------------
+" surr*ound_words             ysiw)           (surround_words)
+" *make strings               ys$"            "make strings"
+" [delete ar*ound me!]        ds]             delete around me!
+" remove <b>HTML t*ags</b>    dst             remove HTML tags
+" 'change quot*es'            cs'"            "change quotes"
+" <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+" delete(functi*on calls)     dsf             function calls
 lua << EOF
 require('nvim-surround').setup {
   surrounds = {
