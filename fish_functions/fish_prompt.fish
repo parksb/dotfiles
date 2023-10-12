@@ -46,7 +46,7 @@ function fish_prompt
     echo -n "$list"
 
     if test -z "$list"
-      echo -n -s (git_ahead $ahead $behind $diverged $none)
+      echo -n -s " " (git_ahead $ahead $behind $diverged $none)
     end
   else
     echo -n -s $directory_color $cwd $normal_color
