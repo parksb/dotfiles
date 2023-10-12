@@ -2,7 +2,6 @@ function fish_prompt
   set -l last_command_status $status
   set -l cwd (prompt_pwd)
 
-  set -l fish     ""
   set -l ahead    "↑"
   set -l behind   "↓"
   set -l diverged "⇄"
@@ -16,10 +15,10 @@ function fish_prompt
   set -l directory_color  (set_color $fish_color_quote 2> /dev/null; or set_color brown)
   set -l repository_color (set_color $fish_color_cwd 2> /dev/null; or set_color green)
 
-  set -l prompt_string $fish
+  set -l prompt_string ""
 
   if test "$theme_ignore_ssh_awareness" != 'yes' -a -n "$SSH_CLIENT$SSH_TTY"
-    set prompt_string "$fish "(whoami)"@"(hostname -s)" $fish"
+    set prompt_string "󰢹 " (whoami)"@"(hostname -s) " "
   end
 
   if test $last_command_status -eq 0
