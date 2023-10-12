@@ -61,6 +61,9 @@ if type -q pnpm
   if test $os = Darwin
     set -gx PNPM_HOME "~/Library/pnpm"
     fish_add_path $PNPM_HOME
+  else if test $os = Linux
+    set -gx PNPM_HOME "~/.local/share/pnpm"
+    fish_add_path $PNPM_HOME
   end
 end
 
@@ -144,6 +147,7 @@ if test $os = Darwin
   fish_add_path_if_exists /opt/homebrew/opt/libpq/bin
 end
 fish_add_path_if_exists /opt/local/bin
+fish_add_path_if_exists ~/.local/bin
 fish_add_path_if_exists ~/.deno/bin
 fish_add_path_if_exists ~/.cargo/bin
 fish_add_path_if_exists ~/.cabal/bin
