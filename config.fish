@@ -20,14 +20,14 @@ alias_if_exists nvim 'vi' 'nvim'
 alias_if_exists nvim 'vim' 'nvim'
 
 # configs
-alias zshconf='v ~/.zshrc'
-alias gitconf='v ~/.gitconfig'
-alias vimconf='v ~/.vimrc'
-alias nvimconf='v ~/.config/nvim/init.vim'
-alias tmuxconf='v ~/.tmux.conf'
-alias alacrittyconf='v ~/.alacritty.yml'
-alias weztermconf='v ~/.config/wezterm/wezterm.lua'
-alias fishconf='v ~/.config/fish/config.fish'
+alias zshconf='v $HOME/.zshrc'
+alias gitconf='v $HOME/.gitconfig'
+alias vimconf='v $HOME/.vimrc'
+alias nvimconf='v $HOME/.config/nvim/init.vim'
+alias tmuxconf='v $HOME/.tmux.conf'
+alias alacrittyconf='v $HOME/.alacritty.yml'
+alias weztermconf='v $HOME/.config/wezterm/wezterm.lua'
+alias fishconf='v $HOME/.config/fish/config.fish'
 
 # coreutils alternatives
 alias_if_exists lsd 'ls' 'lsd'
@@ -40,7 +40,8 @@ alias_if_exists delta 'diff' 'delta'
 
 # node
 if type -q nvm && type -q node
-  fish_add_path ~/.nvm/versions/node/(node -v)/bin
+  fish_add_path $HOME/.nvm/versions/node/(node -v)/bin
+  set -gx nvm_default_version lts
 end
 
 # npm
@@ -59,10 +60,10 @@ if type -q pnpm
   alias pnt='pnpm test'
 
   if test $os = Darwin
-    set -gx PNPM_HOME "~/Library/pnpm"
+    set -gx PNPM_HOME "$HOME/Library/pnpm"
     fish_add_path $PNPM_HOME
   else if test $os = Linux
-    set -gx PNPM_HOME "~/.local/share/pnpm"
+    set -gx PNPM_HOME "$HOME/.local/share/pnpm"
     fish_add_path $PNPM_HOME
   end
 end
@@ -81,7 +82,7 @@ end
 
 # python
 if type -q pyenv
-  set -gx PYENV_ROOT ~/.pyenv
+  set -gx PYENV_ROOT $HOME/.pyenv
   fish_add_path_if_exists $PYENV_ROOT/bin
   pyenv init - | source
 end
@@ -110,7 +111,7 @@ if type -q tmux
   alias txl='tmux choose-tree'
   alias txk='tmux kill-session -t'
   alias txka='tmux kill-session -a'
-  fish_add_path_if_exists ~/.tmux/plugins/tpm
+  fish_add_path_if_exists $HOME/.tmux/plugins/tpm
 end
 
 # fzf
@@ -131,7 +132,7 @@ alias clr='clear'
 alias please='sudo'
 alias mv='mv -i'
 alias monitor='top -o vsize'
-alias refresh='source ~/.config/fish/config.fish'
+alias refresh='source $HOME/.config/fish/config.fish'
 alias_if_exists git 'g' 'git'
 alias_if_exists trash 'rm' 'trash'
 alias_if_exists mycli 'sql' 'mycli'
@@ -147,21 +148,21 @@ if test $os = Darwin
   fish_add_path_if_exists /opt/homebrew/opt/libpq/bin
 end
 fish_add_path_if_exists /opt/local/bin
-fish_add_path_if_exists ~/.local/bin
-fish_add_path_if_exists ~/.deno/bin
-fish_add_path_if_exists ~/.cargo/bin
-fish_add_path_if_exists ~/.cabal/bin
-fish_add_path_if_exists ~/.ghcup/bin
-fish_add_path_if_exists ~/bin
+fish_add_path_if_exists $HOME/.local/bin
+fish_add_path_if_exists $HOME/.deno/bin
+fish_add_path_if_exists $HOME/.cargo/bin
+fish_add_path_if_exists $HOME/.cabal/bin
+fish_add_path_if_exists $HOME/.ghcup/bin
+fish_add_path_if_exists $HOME/bin
 # to erase one: `fish_user_path erase`
 
 # env variables
 if type -q bat; set -gx BAT_THEME Dracula; end
 if type -q nvim; set -gx EDITOR nvim; end
-if test -e ~/projects; set -gx PROJECT_DIR ~/projects; end
-if test -e ~/projects; set -gx TEX_PREAMBLES_DIR ~/Documents/TeX/preambles; end
+if test -e $HOME/projects; set -gx PROJECT_DIR $HOME/projects; end
+if test -e $HOME/projects; set -gx TEX_PREAMBLES_DIR $HOME/Documents/TeX/preambles; end
 
 # theme
-if test -e ~/.config/fish/themes/Dracula\ Official.theme
+if test -e $HOME/.config/fish/themes/Dracula\ Official.theme
   fish_config theme choose "Dracula Official"
 end
