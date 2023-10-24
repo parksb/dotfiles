@@ -2,9 +2,9 @@ function fish_prompt
   set -l last_command_status $status
   set -l cwd (prompt_pwd)
 
-  set -l ahead    "↑"
-  set -l behind   "↓"
-  set -l diverged "⇄"
+  set -l ahead    ""
+  set -l behind   ""
+  set -l diverged ""
   set -l dirty    "✗"
   set -l stash    "≡"
   set -l none     "✓"
