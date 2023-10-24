@@ -109,7 +109,7 @@ end
 filetype = vim.bo.filetype
 textFiletypes = {"plaintex", "latex", "markdown"}
 isTexFile = filetype == "plaintex" or filetype == "latex"
-isArticleFile = isTexFile or filetype == "markdown"
+isTextFile = has(textFiletypes, filetype)
 EOF
 
 " ========================
@@ -140,6 +140,7 @@ Plug 'Exafunction/codeium.vim'
 Plug 'NvChad/nvim-colorizer.lua'
 Plug 'sevko/vim-nand2tetris-syntax'
 Plug 'phaazon/hop.nvim'
+Plug 'edluffy/hologram.nvim'
 call plug#end()
 
 " ========================
@@ -273,7 +274,7 @@ EOF
 " ========================
 set termguicolors
 lua << EOF
-if has(textFiletypes, filetype) then
+if isTextFile then
   vim.cmd("colorscheme onehalflight")
 else
   vim.cmd("colorscheme dracula")
@@ -463,7 +464,7 @@ lua require('Comment').setup()
 " ========================
 lua << EOF
 require('scrollbar').setup {
-  show = not isArticleFile,
+  show = not isTextFile,
   show_in_active_only = true,
   handlers = {
     gitsigns = true,
