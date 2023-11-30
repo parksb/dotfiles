@@ -9,7 +9,7 @@ function tex
         if test -e "$preamble_path"
           tectonic -X new $name
           cp -f $preamble_path "$name"/src/_preamble.tex
-          sed -i '' 's/name = \'default\'/name = \''"$name"'\'/' "$name"/Tectonic.toml
+          sed -i '' 's/name = \"default\"/name = \"'"$name"'\"/' "$name"/Tectonic.toml
         else
           echo "A preamble `$preamble` not found from `$preamble_path`"
         end
