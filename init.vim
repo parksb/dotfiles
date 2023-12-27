@@ -136,7 +136,7 @@ Plug 'numToStr/Comment.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kylechui/nvim-surround'
 Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'Exafunction/codeium.vim'
+Plug 'github/copilot.vim'
 Plug 'NvChad/nvim-colorizer.lua'
 Plug 'sevko/vim-nand2tetris-syntax'
 Plug 'phaazon/hop.nvim'
@@ -521,13 +521,6 @@ require("ibl").setup {
   scope = { show_start = false, show_end = false },
 }
 EOF
-
-" ========================
-" codeium.vim
-" ========================
-let g:codeium_filetypes = {
-      \ "markdown": v:false,
-      \ }
 
 " ========================
 " nvim-colorizer.lua
