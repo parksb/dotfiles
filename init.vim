@@ -220,6 +220,7 @@ EOF
 " ========================
 lua << EOF
 require('gitsigns').setup {
+  current_line_blame = true,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -229,42 +230,42 @@ require('gitsigns').setup {
       vim.keymap.set(mode, l, r, opts)
     end
 
-    -- ,n - 다음 헝크로 이동한다.
-    map('n', '<LEADER>n', function()
+    -- 다음 헝크로 이동한다.
+    map('n', ',n', function()
       if vim.wo.diff then return ']c' end
       vim.schedule(function() gs.next_hunk() end)
       return '<Ignore>'
     end, {expr=true})
 
-    -- ,N - 이전 헝크로 이동한다.
-    map('n', '<LEADER>N', function()
+    -- 이전 헝크로 이동한다.
+    map('n', ',N', function()
       if vim.wo.diff then return '[c' end
       vim.schedule(function() gs.prev_hunk() end)
       return '<Ignore>'
     end, {expr=true})
 
-    -- ,s - 해당 헝크를 스테이지한다.
-    map({'n', 'v'}, '<LEADER>gs', ':Gitsigns stage_hunk<CR>')
-    -- ,r - 해당 헝크를 리셋한다.
-    map({'n', 'v'}, '<LEADER>gr', ':Gitsigns reset_hunk<CR>')
-    -- ,S - 버퍼를 스테이지한다.
-    map('n', '<LEADER>gS', gs.stage_buffer)
-    -- ,u - 스테이지한 헝크를 언스테이지한다.
-    map('n', '<LEADER>gu', gs.undo_stage_hunk)
-    -- ,R - 버퍼를 리셋한다.
-    map('n', '<LEADER>gR', gs.reset_buffer)
-    -- ,p - 해당 헝크를 미리본다.
-    map('n', '<LEADER>gp', gs.preview_hunk)
-    -- ,b - 해당 라인의 블레임을 보여준다.
-    map('n', '<LEADER>gb', function() gs.blame_line{full=true} end)
-    -- ,tb - 해당 라인의 블레임을 토글한다.
-    map('n', '<LEADER>gtb', gs.toggle_current_line_blame)
-    -- ,d - diff 윈도우를 연다.
-    map('n', '<LEADER>gd', gs.diffthis)
-    -- ,td - 삭제된 라인 표시를 토글한다.
-    map('n', '<LEADER>gtd', gs.toggle_deleted)
-    -- ih - 헝크를 선택한다.
-    map({'o', 'x'}, '<LEADER>gih', ':<C-U>Gitsigns select_hunk<CR>')
+    -- 해당 헝크를 스테이지한다.
+    map({'n', 'v'}, ',s', ':Gitsigns stage_hunk<CR>')
+    -- 해당 헝크를 리셋한다.
+    map({'n', 'v'}, ',r', ':Gitsigns reset_hunk<CR>')
+    -- 버퍼를 스테이지한다.
+    map('n', ',S', gs.stage_buffer)
+    -- 스테이지한 헝크를 언스테이지한다.
+    map('n', ',u', gs.undo_stage_hunk)
+    -- 버퍼를 리셋한다.
+    map('n', ',R', gs.reset_buffer)
+    -- 해당 헝크를 미리본다.
+    map('n', ',p', gs.preview_hunk)
+    -- 해당 라인의 블레임을 보여준다.
+    map('n', ',b', function() gs.blame_line{full=true} end)
+    -- 해당 라인의 블레임을 토글한다.
+    map('n', ',tb', gs.toggle_current_line_blame)
+    -- diff 윈도우를 연다.
+    map('n', ',d', gs.diffthis)
+    -- 삭제된 라인 표시를 토글한다.
+    map('n', ',td', gs.toggle_deleted)
+    -- 헝크를 선택한다.
+    map({'o', 'x'}, ',ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
 EOF
