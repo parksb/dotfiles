@@ -9,6 +9,7 @@
   pager = delta
   autocrlf = input
   editor = nvim
+  ignorecase = false
 [interactive]
   diffFilter = delta --color-only
 [delta]
