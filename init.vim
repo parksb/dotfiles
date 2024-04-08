@@ -141,6 +141,7 @@ Plug 'NvChad/nvim-colorizer.lua'
 Plug 'sevko/vim-nand2tetris-syntax'
 Plug 'phaazon/hop.nvim'
 Plug 'edluffy/hologram.nvim'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 " ========================
@@ -533,3 +534,24 @@ lua require('colorizer').setup()
 " ========================
 lua require('hop').setup()
 nnoremap <LEADER>f :HopChar1<CR>
+
+" ========================
+" vimwiki
+" ========================
+let g:vimwiki_list = [
+      \ {
+      \   'path': '~/projects/wikiwikiwi/docs',
+      \   'ext': '.md',
+      \   'diary_rel_path': '.',
+      \ },
+      \]
+let g:vimwiki_conceallevel = 0
+let g:vimwiki_global_ext = 0
+" gw - 위키에서 해당 단어가 언급되는 문서를 검색한다.
+nnoremap gw :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
+" gb - 현재 문서를 링크하는 문서를 검색한다.
+nnoremap gb :execute "VWB" <Bar> :lopen<CR>
+" <LEADER>vw - 위키 인덱스를 연다.
+nmap <LEADER>vw <Plug>VimwikiIndex
+" <LEADER>vwt - 마크다운 테이블을 만든다.
+nmap <LEADER>vwt :VimwikiTable<CR>
