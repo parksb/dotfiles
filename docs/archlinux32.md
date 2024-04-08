@@ -135,3 +135,7 @@
     - python: `pacman -S python`, `pacman -S python-pip`, `python -m ensurepip`
         > [!NOTE] 글로벌 패키지를 `pip install`로 설치하면 시스템 패키지와 충돌할 수 있음. `pacman -S python-*`로 설치하거나, `pip install --user`로 설치해야 안전함. virtual env를 권장.
 6. [wiki.archlinux.org/security](https://wiki.archlinux.org/title/security)를 참고해 보안 설정을 한다.
+
+## Troubleshooting
+
+- Signature is unknown trust: https://wiki.archlinux.org/title/Pacman/Package_signing#Cannot_import_keys
