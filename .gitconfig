@@ -124,6 +124,8 @@
         git fetch origin"
   dfo = "!# git diff origin;\n\
         git diff origin"
+  ignore = "!# generate .gitignore file;\n\
+        curl -sL https://www.toptal.com/developers/gitignore/api/$@"
 [fetch]
   purne = true
 [init]
