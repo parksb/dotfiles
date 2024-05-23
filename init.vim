@@ -154,7 +154,17 @@ require('lualine').setup {
     lualine_b = { { 'filename', path = 1 } },
     lualine_c = { 'branch', 'diff', 'diagnostics' },
     lualine_x = { 'encoding', 'filetype', 'filesize' },
-    lualine_y = {},
+    lualine_y = {
+      function()
+        if isTextFile then
+          local wc = vim.api.nvim_eval('wordcount()')
+          if wc['visual_chars'] then
+            return wc['visual_chars']
+          end
+        end
+        return ''
+      end
+    },
     lualine_z = { 'location' }
   },
   tabline = {
