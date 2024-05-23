@@ -40,8 +40,8 @@ alias_if_exists delta 'diff' 'delta'
 
 # node
 if type -q nvm && type -q node
-  fish_add_path $HOME/.nvm/versions/node/(node -v)/bin
   set -gx nvm_default_version lts
+  nvm use -s $nvm_default_version
 end
 
 # npm
