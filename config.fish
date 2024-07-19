@@ -127,6 +127,11 @@ if type -q tex
   alias texo='tex open'
 end
 
+# go
+if type -q go
+  fish_add_path_if_exists (go env GOPATH)/bin
+end
+
 # others
 alias clr='clear'
 alias please='sudo'
