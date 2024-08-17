@@ -79,8 +79,8 @@
        git switch -c"
   st = "!# git stash;\n\
        git stash"
-  sts = "!# git stash save, git sts {stash}, Save a named stash;\n\
-        git stash save"
+  sts = "!# git stash save -k, git sts {stash}, Save a named stash;\n\
+        git stash save -k"
   stl = "!# stash list, Show all stashes;\n\
          _height=$(stty size | awk '{print $1}'); git stash list | awk '{gsub(/:/, \"\", $1); print $0}' |  fzf --preview \"git stash show -p {1} | head -n $_height | delta\";"
   stp = "!# git stash pop, Pop the stash;\n\
