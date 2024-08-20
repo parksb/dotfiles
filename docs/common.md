@@ -87,7 +87,7 @@
 
 # lsd
 > ln -s $DOTFILES_DIR/lsd/config.yaml ~/.config/lsd/config.yaml
-> ln -s $DOTFILES_DIR/lsd/dracula.yaml ~/.config/lsd/colors.yaml
+> ln -s $DOTFILES_DIR/lsd/dracula.yaml ~/.config/lsd/themes/dracula.yaml
 
 # procs
 > ln -s $DOTFILES_DIR/.procs.toml ~/.procs.toml
