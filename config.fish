@@ -93,7 +93,7 @@ if type -q pipenv
   alias pvs='pipenv shell'
 end
 
-alias_if_exists python 'py' 'python'
+alias_if_exists python3 'py' 'python3'
 
 # docker
 if type -q docker
