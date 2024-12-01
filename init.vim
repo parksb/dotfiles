@@ -126,7 +126,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify'
-Plug 'simnalamburt/vim-tiny-ime', { 'do' : './build' }
+Plug 'simnalamburt/vim-tiny-ime'
 Plug 'johngrib/vim-f-hangul'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -550,13 +550,14 @@ nnoremap <LEADER>f :HopChar1<CR>
 " ========================
 let g:vimwiki_list = [
       \ {
-      \   'path': '~/projects/wikiwikiwi/docs',
+      \   'path': '~/projects/pedia/docs',
       \   'ext': '.md',
       \   'diary_rel_path': '.',
       \ },
       \]
 let g:vimwiki_conceallevel = 0
 let g:vimwiki_global_ext = 0
+let g:vimwiki_autowriteall = 0
 " gw - 위키에서 해당 단어가 언급되는 문서를 검색한다.
 nnoremap gw :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
 " gb - 현재 문서를 링크하는 문서를 검색한다.
