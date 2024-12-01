@@ -42,7 +42,9 @@ $ sudo vi /etc/ssh/ssh_config
 > Port 22
 ```
 
-방화벽을 설정한다.
+포트를 변경했어도 외부로 공개하면 스팸 접속 시도가 들어온다. 라우터에서 포트포워딩하지 말고, 웬만하면 Tailscale을 사용하는 것이 낫다.
+
+이어서 방화벽을 설정한다.
 
 ```sh
 $ sudo apt install ufw
@@ -61,7 +63,7 @@ $ apt install ddclient
 
 netdata.config 파일을 호스트에서 수정할 일이 많으니 볼륨대신 `/etc/netdata` 디렉토리를 바인드 마운트한다. 호스트에 `/etc/netdata` 디렉토리를 만들고, `netdata.config` 파일을 복사해 넣어둔다. 기본 포트는 19999인데 포트를 바꾸고 싶다면 `[web] default port`를 수정한다.
 
-로컬호스트에는 기본적으로 열리니까 SSH 터널링해서 접속하면 되고, `[web] bind to = 0.0.0.0`으로 설정하면 포트가 공개된다. 단, 아무나 접근하면 안 되니까 `ufw`로 동일망 내에서만 접속할 수 있도록 제한한다.
+로컬호스트에는 기본적으로 열리니까 SSH 터널링해서 접속하면 되고, `[web] bind to = 0.0.0.0`으로 설정하면 포트가 공개된다. 단, 아무나 접근하면 안 되니까 `ufw`로 동일망 내에서만 접속할 수 있도록 제한한다. 아니면 아예 netdata 클라우드만 사용한다.
 
 파이의 CPU 온도를 모니터링하려면 빌트인된 컬렉터를 사용한다. 디폴트로는 꺼져있기 때문에 직접 활성화해야 한다: https://learn.netdata.cloud/docs/collecting-metrics/hardware-devices-and-sensors/linux-sensors-sysfs
 
