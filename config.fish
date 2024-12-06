@@ -171,3 +171,6 @@ if test -e $HOME/projects; set -gx TEX_PREAMBLES_DIR $HOME/Documents/TeX/preambl
 if test -e $HOME/.config/fish/themes/Dracula\ Official.theme
   fish_config theme choose "Dracula Official"
 end
+
+# set vi mode
+fish_vi_key_bindings
