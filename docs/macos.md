@@ -11,3 +11,14 @@
   - system settings > keyboard shortcuts > input sources > select next source in input menu를 F19로 설정. (caps lock이 F19로 리매핑된 상태이므로 caps lock을 누르면 됨.)
 - command + shift + s 키로 스크린샷을 클립보드에 붙여넣도록 한다.
   - system settings > keyboard shortcuts > screenshots > copy picture of selected area to the clipboard.
+- 원화 기호를 백틱으로 고정한다.
+  - ~/Library/KeyBindings/DefaultKeyBinding.dict 파일을 만들고 다음 내용을 추가한다:
+    ```
+    {
+      "₩" = ("insertText:", "`");
+    }
+    ```
+  - 아니면 해머스푼을 사용해도 된다.
+- key repeat rate를 빠르게 변경한다:
+  - system settings > keyboard > key repeat rate > fast
+  - system settings > keyboard > delay until repeat > short
