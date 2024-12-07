@@ -124,7 +124,6 @@ Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify'
 Plug 'simnalamburt/vim-tiny-ime'
 Plug 'johngrib/vim-f-hangul'
@@ -142,6 +141,8 @@ Plug 'sevko/vim-nand2tetris-syntax'
 Plug 'phaazon/hop.nvim'
 Plug 'edluffy/hologram.nvim'
 Plug 'vimwiki/vimwiki'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 call plug#end()
 
 " ========================
@@ -382,23 +383,6 @@ command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeI
 nnoremap <silent><nowait> :cocd :<C-u>CocList diagnostics<cr>
 
 " ========================
-" fzf.vim
-" ========================
-" :ls - 버퍼 목록 검색 윈도우를 연다.
-nnoremap :ls :Buffers<CR>
-" :fls - 현재 디렉토리의 모든 파일 목록 검색 윈도우를 연다.
-nnoremap :fls :Files ./<CR>
-" :gls - 현재 디렉토리의 Git이 추적하는 파일 목록 검색 윈도우를 연다.
-nnoremap :gls :GFiles ./<CR>
-" :rg - ripgrep 검색 윈도우를 연다.
-nnoremap :rg :Rg<CR>
-" Rg 검색 시 파일 내용에서만 검색한다.
-command! -bang -nargs=* Rg
-      \ call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case '
-      \ .shellescape(<q-args>), 1,
-      \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-
-" ========================
 " vim-startify
 " ========================
 let g:startify_lists = [
@@ -566,3 +550,14 @@ nnoremap gb :execute "VWB" <Bar> :lopen<CR>
 nmap <LEADER>vw <Plug>VimwikiIndex
 " <LEADER>vwt - 마크다운 테이블을 만든다.
 nmap <LEADER>vwt :VimwikiTable<CR>
+
+" ========================
+" telescope.nvim
+" ========================
+lua << EOF
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+EOF
