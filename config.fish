@@ -39,7 +39,7 @@ alias_if_exists rg 'grep' 'rg'
 alias_if_exists delta 'diff' 'delta'
 
 # node
-if type -q nvm && type -q node
+if type -q nvm
   set -gx nvm_default_version lts
   nvm use -s $nvm_default_version
 end

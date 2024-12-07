@@ -132,3 +132,5 @@
   defaultBranch = main
 [gpg]
   format = ssh
+[pull]
+  ff = only
