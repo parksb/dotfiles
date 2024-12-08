@@ -142,7 +142,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'edluffy/hologram.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'stevearc/oil.nvim'
 call plug#end()
 
@@ -557,10 +557,27 @@ nmap <LEADER>vwt :VimwikiTable<CR>
 " ========================
 lua << EOF
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>jf', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>jj', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>jb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>jh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+vim.keymap.set('n', '<LEADER>sf', builtin.find_files, { desc = 'Search files' })
+vim.keymap.set('n', '<LEADER>sg', builtin.live_grep, { desc = 'Search by grep' })
+vim.keymap.set('n', '<LEADER>sb', builtin.buffers, { desc = 'Search buffers' })
+vim.keymap.set('n', '<LEADER>st', builtin.help_tags, { desc = 'Search help' })
+
+-- <LEADER>/ - 현재 열린 버퍼에서 검색한다.
+vim.keymap.set('n', '<LEADER>/', function()
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = 'Fuzzily search in current buffer' })
+
+-- <LEADER>s/ - 현재 열린 파일에서 검색한다.
+vim.keymap.set('n', '<LEADER>s/', function()
+  builtin.live_grep {
+    grep_open_files = true,
+    prompt_title = 'Live Grep in Open Files',
+  }
+end, { desc = 'Search in open files' })
 EOF
 
 " ========================
