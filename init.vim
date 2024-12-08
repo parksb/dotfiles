@@ -143,6 +143,7 @@ Plug 'edluffy/hologram.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'stevearc/oil.nvim'
 call plug#end()
 
 " ========================
@@ -561,3 +562,8 @@ vim.keymap.set('n', '<leader>jg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>jb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>jh', builtin.help_tags, { desc = 'Telescope help tags' })
 EOF
+
+" ========================
+" oil.nvim
+" ========================
+lua require("oil").setup()
