@@ -558,7 +558,7 @@ nmap <LEADER>vwt :VimwikiTable<CR>
 lua << EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>jf', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>jg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>jj', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>jb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>jh', builtin.help_tags, { desc = 'Telescope help tags' })
 EOF
