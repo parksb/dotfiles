@@ -1,5 +1,3 @@
-[include]
-  path = ~/.delta-themes.gitconfig
 [user]
   name = parksb
   email = parkgds@gmail.com
@@ -134,3 +132,7 @@
   format = ssh
 [pull]
   ff = only
+[include]
+  path = ~/.delta-themes.gitconfig
+[include]
+  path = ~/.local.gitconfig

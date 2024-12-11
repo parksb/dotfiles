@@ -174,3 +174,7 @@ end
 
 # set vi mode
 fish_vi_key_bindings
+
+if test -e $HOME/.config/fish/config.local.fish
+  source $HOME/.config/fish/config.local.fish
+end
