@@ -142,6 +142,7 @@ Plug 'johngrib/vim-f-hangul'
 Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'akinsho/git-conflict.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'petertriho/nvim-scrollbar'
@@ -425,12 +426,9 @@ nnoremap :sts<CR> :SSave<CR>
 " vim-visual-multi
 " ========================
 let g:VM_maps = {}
-let g:VM_Mono_hl   = 'Visual'
-let g:VM_Extend_hl = 'Visual'
-let g:VM_Cursor_hl = 'Visual'
-let g:VM_Insert_hl = 'Visual'
 " <C-m> - 선택한 모든 라인에 커서를 만든다.
 let g:VM_maps["Visual Cursors"] = '<C-m>'
+hi! VM_Mono guibg=#ffb86c guifg=#000000 gui=NONE
 
 " ========================
 " nvim-treesitter
@@ -457,6 +455,11 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+" ========================
+" nvim-treesitter-context
+" ========================
+lua require('treesitter-context').setup()
 
 " ========================
 " git-conflict.nvim
