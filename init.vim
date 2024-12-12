@@ -13,6 +13,7 @@ set incsearch " 검색할 글자를 입력할 때마다 검색한다.
 set number relativenumber " 라인 넘버를 상대적으로 보여준다.
 set encoding=utf-8
 set fileencodings=utf-8
+set cursorline
 
 " ========================
 " 문법 강조
@@ -113,6 +114,17 @@ isTextFile = has(textFiletypes, filetype)
 EOF
 
 " ========================
+" CursorLine
+" ========================
+lua << EOF
+if not isTextFile then
+  vim.api.nvim_create_autocmd('ColorScheme', {
+    command = [[highlight CursorLine guibg=#363844]],
+  })
+end
+EOF
+
+" ========================
 " vim-plug
 " ========================
 call plug#begin('~/.vim/plugged')
@@ -185,6 +197,7 @@ set laststatus=2
 " ========================
 " ;n - nvim-tree 윈도우를 연다.
 nnoremap <LEADER>tt :NvimTreeToggle<CR>
+nnoremap <LEADER>tc :NvimTreeFindFile<CR>
 nnoremap <LEADER>tf :NvimTreeFocus<CR>
 
 lua << EOF
