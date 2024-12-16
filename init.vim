@@ -574,24 +574,24 @@ nmap <LEADER>vwt :VimwikiTable<CR>
 " ========================
 lua << EOF
 local builtin = require('telescope.builtin')
-local can_resume = 0
+local last_search_mode = nil
 
-local function resume()
-  if can_resume == 0 then
-    can_resume = 1
-    builtin.live_grep()
-  else
+local function search(mode, fn)
+  if last_search_mode == mode then
     builtin.resume()
+  else
+    last_search_mode = mode
+    fn()
   end
 end
 
-vim.keymap.set('n', '<LEADER>ss', resume)
-vim.keymap.set('n', '<LEADER>sf', builtin.find_files)
-vim.keymap.set('n', '<LEADER>sb', builtin.buffers)
+vim.keymap.set('n', '<LEADER>ss', function() search('live_grep', builtin.live_grep) end)
+vim.keymap.set('n', '<LEADER>sf', function() search('find_files', builtin.find_files) end)
+vim.keymap.set('n', '<LEADER>sb', function() search('buffers', builtin.buffers) end)
 
 -- <LEADER>/ - 현재 열린 버퍼에서 검색한다.
 vim.keymap.set('n', '<LEADER>/', function()
-  builtin.current_buffer_fuzzy_find(require('builtin.themes').get_dropdown {
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
     previewer = false,
   })
