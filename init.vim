@@ -32,28 +32,6 @@ autocmd BufRead * autocmd FileType <buffer> ++once
 au BufWritePre * :%s/\s\+$//e
 
 " ========================
-" 파일 유형별 명령
-" ========================
-" <LEADER>r - 실행
-au BufEnter *.c nnoremap <LEADER>r :!make run<CR>
-au BufEnter *.cpp nnoremap <LEADER>r :!make run<CR>
-au BufEnter *.rs nnoremap <LEADER>r :!cargo run<CR>
-au BufEnter *.js,*ts nnoremap <LEADER>r :!npm start<CR>
-au BufEnter *.tex nnoremap <LEADER>r :!texo<CR>
-au BufEnter *.py nnoremap <LEADER>r :!python3 %<CR>
-au BufEnter *.hs nnoremap <LEADER>r :!runghc %<CR>
-" <LEADER>b - 빌드
-au BufEnter *.c nnoremap <LEADER>b :!make build<CR>
-au BufEnter *.cpp nnoremap <LEADER>b :!make build<CR>
-au BufEnter *.rs nnoremap <LEADER>b :!cargo build<CR>
-au BufEnter *.js,*.ts nnoremap <LEADER>b :!npm run build<CR>
-au BufEnter *.tex nnoremap <LEADER>b :!texb<CR>
-au BufEnter *.hs nnoremap <LEADER>b :!ghc %<CR>
-" <LEADER>s - 테스트
-au BufEnter *.rs nnoremap <LEADER>s :!cargo test<CR>
-au BufEnter *.js,*.ts nnoremap <LEADER>s :!npm run test<CR>
-
-" ========================
 " 버퍼
 " ========================
 nnoremap :bn :bn<CR>
@@ -158,6 +136,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 Plug 'stevearc/oil.nvim'
 Plug 'Bekaboo/dropbar.nvim'
+Plug 'nvim-pack/nvim-spectre'
 call plug#end()
 
 " ========================
@@ -610,3 +589,9 @@ EOF
 " oil.nvim
 " ========================
 lua require("oil").setup()
+
+" ========================
+" nvim-spectre
+" ========================
+lua vim.keymap.set('n', '<LEADER>rr', '<CMD>lua require("spectre").open_visual()<CR>')
+lua vim.keymap.set('n', '<LEADER>ro', ':lua require("spectre.actions").run_replace()<CR>')
