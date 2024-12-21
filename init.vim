@@ -554,13 +554,19 @@ nmap <LEADER>vwt :VimwikiTable<CR>
 lua << EOF
 local builtin = require('telescope.builtin')
 local last_search_mode = nil
+local last_cwd = nil
 
 local function search(mode, fn)
-  if last_search_mode == mode then
+  local cwd = vim.fn.expand('%:p:h')
+  vim.api.nvim_echo({ { 'Searching in ' .. cwd, 'InfoMsg' } }, true, {})
+  if last_search_mode == mode and last_cwd == cwd then
     builtin.resume()
   else
     last_search_mode = mode
-    fn()
+    last_cwd = cwd
+    fn {
+      cwd = cwd,
+    }
   end
 end
 
