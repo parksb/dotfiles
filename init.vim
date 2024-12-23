@@ -193,6 +193,7 @@ local function custom_on_attach(bufnr)
 
   api.config.mappings.default_on_attach(bufnr) -- default mappings
 
+  vim.keymap.set('n', '<C-CR>', apit.tree.change_root_to_node, opts('CD'))
   vim.keymap.set('n', 'd', api.fs.trash, opts('Trash'))
   vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
 end
@@ -554,10 +555,16 @@ nmap <LEADER>vwt :VimwikiTable<CR>
 lua << EOF
 local builtin = require('telescope.builtin')
 local last_search_mode = nil
-local last_cwd = nil
+local last_cwd = vim.fn.getcwd()
 
 local function search(mode, fn)
-  local cwd = vim.fn.expand('%:p:h')
+  local cwd = last_cwd
+
+  local buf = vim.api.nvim_buf_get_name(0)
+  if vim.fn.fnamemodify(buf, ":t"):match("^NvimTree_") then
+    cwd = vim.fn.getcwd()
+  end
+
   vim.api.nvim_echo({ { 'Searching in ' .. cwd, 'InfoMsg' } }, true, {})
   if last_search_mode == mode and last_cwd == cwd then
     builtin.resume()
