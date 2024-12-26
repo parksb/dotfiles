@@ -193,7 +193,7 @@ local function custom_on_attach(bufnr)
 
   api.config.mappings.default_on_attach(bufnr) -- default mappings
 
-  vim.keymap.set('n', '<C-CR>', apit.tree.change_root_to_node, opts('CD'))
+  vim.keymap.set('n', '<C-CR>', api.tree.change_root_to_node, opts('CD'))
   vim.keymap.set('n', 'd', api.fs.trash, opts('Trash'))
   vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
 end
