@@ -8,6 +8,8 @@
   autocrlf = input
   editor = nvim
   ignorecase = false
+  fsmonitor = true
+  untrackedcache = true
 [interactive]
   diffFilter = delta --color-only
 [delta]
