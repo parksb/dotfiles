@@ -130,7 +130,6 @@ Plug 'github/copilot.vim'
 Plug 'NvChad/nvim-colorizer.lua'
 Plug 'sevko/vim-nand2tetris-syntax'
 Plug 'phaazon/hop.nvim'
-Plug 'edluffy/hologram.nvim'
 Plug 'vimwiki/vimwiki'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
@@ -276,6 +275,15 @@ require('gitsigns').setup {
     map({'o', 'x'}, ',ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+EOF
+
+" ========================
+" git-conflict.nvim
+" ========================
+lua << EOF
+vim.api.nvim_set_hl(0, 'DiffText', { fg = '#ffffff', bg = '#1d3b40' })
+vim.api.nvim_set_hl(0, 'DiffAdd', { fg = '#ffffff', bg = '#1d3450' })
+require('git-conflict').setup()
 EOF
 
 " ========================
@@ -442,11 +450,6 @@ EOF
 lua require('treesitter-context').setup()
 
 " ========================
-" git-conflict.nvim
-" ========================
-lua require('git-conflict').setup()
-
-" ========================
 " Comment.nvim
 " ========================
 " gcc - 현재 라인의 주석을 토글한다.
@@ -540,14 +543,10 @@ let g:vimwiki_list = [
 let g:vimwiki_conceallevel = 0
 let g:vimwiki_global_ext = 0
 let g:vimwiki_autowriteall = 0
-" gw - 위키에서 해당 단어가 언급되는 문서를 검색한다.
-nnoremap gw :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
-" gb - 현재 문서를 링크하는 문서를 검색한다.
-nnoremap gb :execute "VWB" <Bar> :lopen<CR>
-" <LEADER>vw - 위키 인덱스를 연다.
-nmap <LEADER>vw <Plug>VimwikiIndex
-" <LEADER>vwt - 마크다운 테이블을 만든다.
-nmap <LEADER>vwt :VimwikiTable<CR>
+" <LEADER>wr - 위키에서 해당 단어가 언급되는 문서를 검색한다.
+nnoremap <LEADER>ww :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
+" <LEADER>ww - 현재 문서를 링크하는 문서를 검색한다.
+nnoremap <LEADER>wb :execute "VWB" <Bar> :lopen<CR>
 
 " ========================
 " telescope.nvim
