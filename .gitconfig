@@ -17,6 +17,9 @@
   features = woolly-mammoth
 [merge]
   conflictstyle = diff3
+  tool = nvim
+[margetool "nvim"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c 'wincmd w' -c 'wincmd J'
 [diff]
   colorMoved = default
 [commit]
