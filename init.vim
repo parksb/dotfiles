@@ -121,7 +121,7 @@ Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'akinsho/git-conflict.nvim'
+Plug 'rhysd/conflict-marker.vim'
 Plug 'numToStr/Comment.nvim'
 Plug 'petertriho/nvim-scrollbar'
 Plug 'kylechui/nvim-surround'
@@ -275,15 +275,6 @@ require('gitsigns').setup {
     map({'o', 'x'}, ',ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
-EOF
-
-" ========================
-" git-conflict.nvim
-" ========================
-lua << EOF
-vim.api.nvim_set_hl(0, 'DiffText', { fg = '#ffffff', bg = '#1d3b40' })
-vim.api.nvim_set_hl(0, 'DiffAdd', { fg = '#ffffff', bg = '#1d3450' })
-require('git-conflict').setup()
 EOF
 
 " ========================
@@ -607,3 +598,16 @@ lua require("oil").setup()
 " ========================
 lua vim.keymap.set('n', '<LEADER>rr', '<CMD>lua require("spectre").open_visual()<CR>')
 lua vim.keymap.set('n', '<LEADER>ro', ':lua require("spectre.actions").run_replace()<CR>')
+
+" ========================
+" conflict-marker.vim
+" ========================
+let g:conflict_marker_begin = '^<<<<<<<\s.*$'
+let g:conflict_marker_common_ancestors = '^|||||||\s.*$'
+let g:conflict_marker_separator = '^=======$'
+let g:conflict_marker_end = '^>>>>>>>\s.*$'
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
+highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
