@@ -4,6 +4,13 @@ return {
   dependencies = { "MunifTanjim/nui.nvim" },
   opts = {
     lsp = {
+      documentation = {
+        opts = {
+          size = {
+            max_width = vim.api.nvim_win_get_width(0) - 20,
+          },
+        },
+      },
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
         ["vim.lsp.util.stylize_markdown"] = true,

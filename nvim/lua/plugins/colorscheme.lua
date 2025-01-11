@@ -8,9 +8,12 @@ return {
     end,
     opts = {
       show_end_of_buffer = true,
-      overrides = {
-        CursorLine = { bg = "#363844" },
-      },
+      overrides = function(colors)
+        return {
+          CursorLine = { bg = "#30303c" },
+          NvimTreeIndentMarker = { fg = colors.comment, },
+        }
+      end,
     },
   },
 }
