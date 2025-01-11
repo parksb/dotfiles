@@ -21,21 +21,36 @@ return {
       else
         last_search_mode = mode
         last_cwd = cwd
-        fn { cwd = cwd }
+        fn({ cwd = cwd })
       end
     end
 
     return {
-      { "<LEADER>ss", function() search("live_grep", builtin.live_grep) end },
-      { "<LEADER>sf", function() search("find_files", builtin.find_files) end },
-      { "<LEADER>sb", function() search("buffers", builtin.buffers) end },
+      {
+        "<LEADER>ss",
+        function()
+          search("live_grep", builtin.live_grep)
+        end,
+      },
+      {
+        "<LEADER>sf",
+        function()
+          search("find_files", builtin.find_files)
+        end,
+      },
+      {
+        "<LEADER>sb",
+        function()
+          search("buffers", builtin.buffers)
+        end,
+      },
       {
         "<LEADER>/",
         function()
-          builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+          builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
             winblend = 10,
             previewer = false,
-          })
+          }))
         end,
       },
     }

@@ -13,15 +13,23 @@ return {
 
       -- Next hunk
       map("n", ",n", function()
-        if vim.wo.diff then return "]c" end
-        vim.schedule(function() gs.next_hunk() end)
+        if vim.wo.diff then
+          return "]c"
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
         return "<Ignore>"
       end, { expr = true })
 
       -- Prev hunk
       map("n", ",N", function()
-        if vim.wo.diff then return "[c" end
-        vim.schedule(function() gs.prev_hunk() end)
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
         return "<Ignore>"
       end, { expr = true })
 
@@ -38,7 +46,9 @@ return {
       -- Preview the current hunk
       map("n", ",p", gs.preview_hunk)
       -- Show blame for the current line
-      map("n", ",b", function() gs.blame_line{ fulll = true } end)
+      map("n", ",b", function()
+        gs.blame_line({ fulll = true })
+      end)
       -- Toggle current line blame
       map("n", ",tb", gs.toggle_current_line_blame)
       -- Open the diff view for the current file
@@ -47,6 +57,6 @@ return {
       map("n", ",td", gs.toggle_deleted)
       -- Select the current hunk
       map({ "o", "x" }, ",ih", ":<C-U>Gitsigns select_hunk<CR>")
-    end
+    end,
   },
 }

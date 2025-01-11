@@ -16,9 +16,9 @@ return {
             end
           end
           return ""
-        end
+        end,
       },
-      lualine_z = { "location" }
+      lualine_z = { "location" },
     },
     tabline = {
       lualine_a = {

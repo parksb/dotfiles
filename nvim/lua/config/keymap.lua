@@ -4,4 +4,4 @@ vim.keymap.set("n", ":bd<CR>", ":bn | bd #<CR>", { remap = false, silent = true 
 vim.keymap.set("n", ":bda<CR>", ":%bd | e# | bd#<CR>", { remap = false, silent = true })
 
 vim.keymap.set("n", ":W<CR>", ":w<CR>", { desc = "Write buffer", remap = false, silent = true })
-vim.keymap.set("v", "<C-y>", "\"+y", { desc = "Copy to clipboard", remap = false, silent = true })
+vim.keymap.set("v", "<C-y>", '"+y', { desc = "Copy to clipboard", remap = false, silent = true })

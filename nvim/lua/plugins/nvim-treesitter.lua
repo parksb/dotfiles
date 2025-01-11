@@ -3,7 +3,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
     build = ":TSUpdate",
-    config = function ()
+    config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "c",
@@ -36,7 +36,7 @@ return {
           "typescript",
           "vim",
           "vimdoc",
-          "yaml"
+          "yaml",
         },
         sync_install = false,
         auto_install = true,

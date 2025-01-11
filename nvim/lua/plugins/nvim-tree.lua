@@ -42,6 +42,6 @@ return {
       vim.keymap.set("n", "<C-CR>", api.tree.change_root_to_node, opts("CD"))
       vim.keymap.set("n", "d", api.fs.trash, opts("Trash"))
       vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
-    end
+    end,
   },
 }
