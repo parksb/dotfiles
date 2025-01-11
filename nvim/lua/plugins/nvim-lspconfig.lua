@@ -5,6 +5,7 @@ return {
       "saghen/blink.cmp",
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "nvim-telescope/telescope.nvim",
     },
     init = function()
       vim.diagnostic.config({
@@ -42,16 +43,7 @@ return {
         },
       })
 
-      local function on_attach(_, bufnr)
-        local opts = { noremap = true, silent = true, buffer = bufnr }
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<LEADER>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<LEADER>ca", vim.lsp.buf.code_action, opts)
-      end
-
+      local telescope = require("telescope.builtin")
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require("lspconfig")
       require("mason-lspconfig").setup_handlers({
@@ -76,7 +68,17 @@ return {
           end
 
           lspconfig[server_name].setup({
-            on_attach = on_attach,
+            on_attach = function(_, buf)
+              local opts = { noremap = true, silent = true, buffer = buf }
+              vim.keymap.set("n", "gd",
+                "<CMD>Telescope lsp_definitions reuse_win=true theme=dropdown<CR>", opts)
+              vim.keymap.set("n", "gi",
+                "<CMD>Telescope lsp_implementations reuse_win=true theme=dropdown<CR>", opts)
+              vim.keymap.set("n", "gr", "<CMD>Telescope lsp_references theme=dropdown<CR>", opts)
+              vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+              vim.keymap.set("n", "<LEADER>rn", vim.lsp.buf.rename, opts)
+              vim.keymap.set("n", "<LEADER>ca", vim.lsp.buf.code_action, opts)
+            end,
             capabilities = vim.deepcopy(capabilities),
             settings = settings,
           })
