@@ -82,8 +82,7 @@
 # vi-like
 > ln -s $DOTFILES_DIR/.vimrc ~/.vimrc
 > ln -s $DOTFILES_DIR/.ideavimrc ~/.ideavimrc
-> ln -s $DOTFILES_DIR/init.vim ~/.config/nvim/init.vim
-> ln -s $DOTFILES_DIR/coc-settings.json ~/.config/nvim/coc-settings.json
+> ln -s $DOTFILES_DIR/nvim ~/.config/nvim
 
 # lsd
 > ln -s $DOTFILES_DIR/lsd/config.yaml ~/.config/lsd/config.yaml
