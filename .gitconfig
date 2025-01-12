@@ -14,7 +14,6 @@
   diffFilter = delta --color-only
 [delta]
   navigate = true
-  features = woolly-mammoth
 [merge]
   conflictstyle = diff3
   tool = nvim
