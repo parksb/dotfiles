@@ -3,7 +3,7 @@ return {
   cmd = "Trouble",
   opts = {
     modes = {
-      test = {
+      diagnostics_with_preview = {
         mode = "diagnostics",
         preview = {
           type = "split",
@@ -17,7 +17,12 @@ return {
   keys = {
     {
       "<leader>xx",
-      "<cmd>Trouble diagnostics toggle<cr>",
+      "<cmd>Trouble diagnostics_with_preview toggle filter.buf=0<cr>",
+      desc = "Buffer Diagnostics (Trouble)",
+    },
+    {
+      "<leader>xX",
+      "<cmd>Trouble diagnostics_with_preview toggle<cr>",
       desc = "Diagnostics (Trouble)",
     },
     {

@@ -22,7 +22,6 @@ M.is_text_file = function()
   if M.has(vim.bo.filetype, text_ft) then
     return true
   end
-  vim.api.nvim_echo({ { "no" } }, true, {})
   return false
 end
 

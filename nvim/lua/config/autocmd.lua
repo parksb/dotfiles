@@ -2,7 +2,7 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
--- Highlight on yank
+-- 복사한 블록을 강조한다.
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
@@ -10,7 +10,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Check if we need to reload the file when it changed
+-- 파일이 변경되었을 때 리로드할 필요가 있는지 확인한다.
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   group = augroup("checktime"),
   callback = function()
@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   end,
 })
 
--- resize splits if window got resized
+-- 윈도우 크기가 조정되면 스플릿 크기를 조정한다.
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
   callback = function()
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- go to last loc when opening a buffer
+-- 버퍼를 열 때 마지막 수정 위치로 이동한다.
 vim.api.nvim_create_autocmd("BufReadPost", {
   group = augroup("last_loc"),
   callback = function(event)

@@ -8,7 +8,7 @@ return {
       lualine_c = { "branch", "diff", "diagnostics" },
       lualine_x = { "encoding", "filetype", "filesize" },
       lualine_y = {
-        function()
+        function() -- 텍스트 파일에서는 글자수를 표시한다.
           if require("config.util").is_text_file() then
             local wc = vim.api.nvim_eval("wordcount()")
             if wc["visual_chars"] then
