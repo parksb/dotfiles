@@ -41,7 +41,6 @@ return {
       dockerls = {},
       html = {},
       ts_ls = {},
-      eslint = {},
       jsonls = {},
       marksman = {},
       pyright = {},
