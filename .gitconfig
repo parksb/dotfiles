@@ -19,6 +19,7 @@
   tool = nvim
 [mergetool "nvim"]
   cmd = nvim -d $LOCAL $MERGED $REMOTE -c 'wincmd w' -c 'wincmd J'
+  keepBackup = false
 [diff]
   colorMoved = default
 [commit]
