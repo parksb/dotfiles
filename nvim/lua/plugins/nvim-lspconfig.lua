@@ -79,6 +79,7 @@ return {
             )
             vim.keymap.set("n", "gr", "<CMD>Telescope lsp_references theme=dropdown<CR>", opts("Go to references"))
             vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show documentation"))
+            vim.keymap.set("n", "X", vim.diagnostic.open_float, opts("Show diagnostics"))
             vim.keymap.set("n", "<LEADER>rn", vim.lsp.buf.rename, opts("Rename symbol"))
             vim.keymap.set("n", "<LEADER>ca", vim.lsp.buf.code_action, opts("Show code actions"))
           end,
