@@ -29,7 +29,7 @@ return {
       },
       views = {
         mini = {
-          timeout = 3000,
+          timeout = 3500,
           size = {
             max_width = win_width - 50,
           },

@@ -47,3 +47,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+-- 커서를 올린 곳에 LSP 진단 윈도우를 연다.
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+  callback = function()
+    vim.diagnostic.open_float()
+  end,
+})
