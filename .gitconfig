@@ -42,6 +42,8 @@
     | cut -c1-85"
   s = "!# git status -s;\n\
        git status -s"
+  su = "!# git status -s | rg ^U.+;\n\
+       git status -s | rg ^U.+"
   l = "!# git log --oneline --graph --decorate --color;\n\
        git log --oneline --graph --decorate --color"
   la = "!# git log --all --oneline --graph --decorate --color;\n\
