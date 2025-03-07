@@ -1,0 +1,3 @@
+return {
+  linter = { "fish" },
+}

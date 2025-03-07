@@ -9,13 +9,12 @@ return {
     })
   end,
   config = function()
-    -- TODO: linter 설정을 각 언어 파일로 옮기기.
     require("lint").linters_by_ft = {
-      fish = { "fish" },
-      sh = { "shellcheck" },
-      rust = { "clippy" },
-      javascript = { "eslint" },
-      typescript = { "eslint" },
+      fish = require("plugins/langs/fish").linter,
+      sh = require("plugins/langs/shell-script").linter,
+      rust = require("plugins/langs/rust").linter,
+      javascript = require("plugins/langs/javascript").linter,
+      typescript = require("plugins/langs/javascript").linter,
     }
   end,
 }

@@ -4,4 +4,5 @@ return {
     "prettier",
     stop_after_first = true,
   },
+  linter = { "eslint" },
 }
