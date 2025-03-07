@@ -44,4 +44,12 @@ config.keys = {
   { key = 'o', mods = 'CMD', action = wezterm.action.ActivatePaneDirection("Next") },
 }
 
+-- override config with local config (wezterm-local.lua)
+local success, local_config = pcall(require, "wezterm-local")
+if success and type(local_config) == "table" then
+  for k, v in pairs(local_config) do
+    config[k] = v
+  end
+end
+
 return config
