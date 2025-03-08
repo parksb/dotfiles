@@ -10,22 +10,52 @@
   ignorecase = false
   fsmonitor = true
   untrackedcache = true
+[help]
+  autocorrect = prompt
 [interactive]
   diffFilter = delta --color-only
 [delta]
   navigate = true
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
   tool = nvim
+[rebase]
+  autostash = true
 [mergetool]
   keepBackup = false
 [mergetool "nvim"]
   cmd = nvim -d $LOCAL $MERGED $REMOTE -c 'wincmd w' -c 'wincmd J'
+[rerere]
+  enabled = true
+  autoupdate = true
 [diff]
   colorMoved = default
+  algorithm = histogram
 [commit]
   template = ~/.stCommitMsg
   gpgSign = true
+  verbose = true
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+[push]
+  default = simple
+  autoSetupMerge = true
+  followTags = true
+[pull]
+  ff = only
+  rebase = true
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[column]
+  ui = auto
+[init]
+  defaultBranch = main
+[gpg]
+  format = ssh
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
@@ -132,14 +162,6 @@
         git diff origin"
   ignore = "!# generate .gitignore file;\n\
         curl -sL https://www.toptal.com/developers/gitignore/api/$@"
-[fetch]
-  purne = true
-[init]
-  defaultBranch = main
-[gpg]
-  format = ssh
-[pull]
-  ff = only
 [include]
   path = ~/.delta-themes.gitconfig
 [include]
