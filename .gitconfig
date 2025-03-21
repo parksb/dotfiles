@@ -81,29 +81,18 @@
   lr = "!# git log --reflog --graph --oneline --decorate --color;\n\
        git log --reflog --graph --oneline --decorate --color"
   ch = "!# git checkout;\n\
-        _height=$(stty size | awk '{print $1}');\
-        git branch -r | egrep -v '^\\*' | fzf --preview \"git log --graph --oneline --decorate --color {1} | head -n $_height\" | xargs git checkout;"
+        git branch -r | sed 's/origin\\///' | fzf $FZF_INLINE_OPTS --preview \"g l origin/{1} | head -n 1000\" | xargs -I {} git switch {} || git checkout -t origin/{};"
   sw = "!# git switch;\n\
-        _height=$(stty size | awk '{print $1}');\
-        git branch -a | grep -v origin | egrep -v '^\\*' | fzf --preview \"git log --graph --oneline --decorate --color {1} | head -n $_height\" | xargs git switch;"
+        git branch -a | grep -v origin | egrep -v '^\\*' | fzf $FZF_INLINE_OPTS --preview \"git l {1} | head -n 1000\" | xargs git switch;"
   re = "!# git reset;\n\
-        _height=$(stty size | awk '{print $1}');\
-        git log --pretty=format:\"%h : %s\" | fzf --preview \"git log --graph --oneline --decorate --color | head -n $_height\" | awk '{gsub(/ : .*/, \"\", $0); print $0}' | xargs git reset;"
+        git log --pretty=format:\"%h: %s\" origin/$(git branch --show-current) | fzf $FZF_INLINE_OPTS | awk '{gsub(/: .*/, \"\", $0); print $0}' | xargs git reset;"
   a = "!# git add;\n\
-       _height=$(stty size | awk '{print $1}');\
-       git status -s | fzf -m --preview \"git diff {2} | head -n $_height | delta\" | awk '{print $2}' | xargs git add;"
+       git status -s | fzf -m --preview 'git diff {2} | delta' | awk '{print $2}' | xargs git add;"
   aa = "!# git add --all;\n\
         git add --all"
-  ap = "!# git add -p\n\
-        _height=$(stty size | awk '{print $1}');\
-        git status -s | fzf --preview \"git diff {2} | head -n $_height | delta\" | awk '{print $2}' | xargs git add -p;"
-  c = "!# git commit;\n\
-       git commit"
-  cv = "!# git commit -v;\n\
-        git commit -v"
   cm = "!# git commit -m, git cm {message};\n\
        git commit -m"
-  cun = "!# git reset HEAD~, Undo last commit;\n\
+  cu = "!# git reset HEAD~, Undo last commit;\n\
         git reset HEAD~"
   b = "!# git branch;\n\
       git branch"
@@ -113,36 +102,28 @@
        git branch -D"
   bn = "!# git switch -c, git bn {branch}, Create a new branch and switch;\n\
        git switch -c"
-  st = "!# git stash;\n\
-       git stash"
-  sts = "!# git stash save -k, git sts {stash}, Save a named stash;\n\
+  st = "!# git stash save -k, git sts {stash}, Save a named stash;\n\
         git stash save -k"
-  stl = "!# stash list, Show all stashes;\n\
-         _height=$(stty size | awk '{print $1}'); git stash list | awk '{gsub(/:/, \"\", $1); print $0}' |  fzf --preview \"git stash show -p {1} | head -n $_height | delta\";"
   stp = "!# git stash pop, Pop the stash;\n\
-         _height=$(stty size | awk '{print $1}'); git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf --preview \"git stash show -p {1} | head -n $_height | delta\" | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash pop;"
-  std = "!# git stash drop, Drop the stash;\n\
-         _height=$(stty size | awk '{print $1}'); git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf --preview \"git stash show -p {1} | head -n $_height | delta\" | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash drop;"
-  pl = "!# git pull;\n\
-       git pull"
+        git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash pop;"
+  stx = "!# git stash drop, Drop the stash;\n\
+        git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash drop;"
   plr = "!# git pull --rebase origin {branch};\n\
-         git branch | awk '/^\\*/{print $2}' | xargs git pull --rebase origin"
-  ps = "!# git push;\n\
-       git push"
+        git branch | awk '/^\\*/{print $2}' | xargs git pull --rebase origin"
   pso = "!# git push origin {branch}, Push to current branch of the origin repo;\n\
-         git branch | awk '/^\\*/{print $2}' | xargs git push origin"
-  sub = "!# git restore --staged, Unstage the staged files\n\
-         git diff --name-only --cached | fzf -m | xargs git restore --staged;"
-  dtn = "!# git clean -f --, Discard the changes of the untracked files;\n\
-         git status -s | awk '{print $2}' | fzf -m | xargs git clean -f --"
-  dtna = "!# git clean -fd, Discard all untracked changes;\n\
-         git clean -fd --dry-run; read -p \"Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git clean -fd; fi"
-  dt = "!# git restore, Discard the changes of the tracked files;\n\
-        git status -s -uno | awk '{print $2}' | fzf -m | xargs git restore"
-  dta = "!# git reset --hard, Discard the all staged changes;\n\
-        git reset --hard"
-  r = "!# git rebase;\n\
-      git rebase"
+        git branch | awk '/^\\*/{print $2}' | xargs git push origin"
+  u = "!# git restore --staged, Unstage the staged files\n\
+      git diff --staged --name-only | fzf $FZF_INLINE_OPTS -m | xargs git restore --staged"
+  xn = "!# git clean -f --, Discard the changes of the untracked files;\n\
+      git status -s | awk '$1 == \"??\" {print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git clean -f --"
+  xna = "!# git clean -fd, Discard all untracked changes;\n\
+       git clean -fd --dry-run; read -p \"Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git clean -fd; fi"
+  x = "!# git restore, Discard the changes of the tracked files;\n\
+       git status -s -uno | awk '{print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git restore"
+  xa = "!# git reset --hard, Discard the all tracked changes;\n\
+        read -p \"All tracked changes will be discarded. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git reset --hard; fi"
+  r = "!# git rebase -i;\n\
+      git log --pretty=format:'%h: %s' origin/$(git branch --show-current) | fzf $FZF_INLINE_OPTS | awk '{gsub(/: .*/, \"\", $0); print $0}' | xargs -I {} git rebase -i {}^;"
   ron = "!# git rebase --onto;\n\
       git rebase --onto"
   rc = "!# git rebase --continue;\n\

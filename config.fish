@@ -117,6 +117,7 @@ end
 # fzf
 if type -q fzf
   alias fh='history | fzf'
+  set -gx FZF_INLINE_OPTS "--height 40% --layout=reverse --border"
 end
 
 # tectonic
