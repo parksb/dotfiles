@@ -62,6 +62,10 @@
   process = git-lfs filter-process
   required = true
 [alias]
+  log-short = "log --pretty=format:'%h %s'"
+  current-branch = "branch --show-current"
+  fzf-log = "!git log-short | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
+  fzf-log-origin = "!git log-short origin/$(git current-branch) | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
   alias = "!# Show all aliases;\n\
     git config --list \
     | egrep '^alias.+' \
@@ -81,11 +85,11 @@
   lr = "!# git log --reflog --graph --oneline --decorate --color;\n\
        git log --reflog --graph --oneline --decorate --color"
   ch = "!# git checkout;\n\
-        git branch -r | sed 's/origin\\///' | fzf $FZF_INLINE_OPTS --preview \"g l origin/{1} | head -n 1000\" | xargs -I {} git switch {} || git checkout -t origin/{};"
+        git branch -r | sed 's/origin\\///' | fzf $FZF_INLINE_OPTS --preview 'git l origin/{1} | head -n 1000' | xargs -I {} git switch {} || git checkout -t origin/{}"
   sw = "!# git switch;\n\
-        git branch -a | grep -v origin | egrep -v '^\\*' | fzf $FZF_INLINE_OPTS --preview \"git l {1} | head -n 1000\" | xargs git switch;"
+        git branch | egrep -v '^\\*' | fzf $FZF_INLINE_OPTS --preview 'git l {1} | head -n 1000' | xargs git switch"
   re = "!# git reset;\n\
-        git log --pretty=format:\"%h: %s\" origin/$(git branch --show-current) | fzf $FZF_INLINE_OPTS | awk '{gsub(/: .*/, \"\", $0); print $0}' | xargs git reset;"
+        git fzf-log-origin | xargs git reset"
   a = "!# git add;\n\
        git status -s | fzf -m --preview 'git diff {2} | delta' | awk '{print $2}' | xargs git add;"
   aa = "!# git add --all;\n\
@@ -98,32 +102,34 @@
       git branch"
   ba = "!# git branch -a, Show all branches;\n\
        git branch -a"
-  bd = "!# git branch -D, git bd {branch}, Delete a branch;\n\
+  bx = "!# git branch -D, git bd {branch}, Delete a branch;\n\
        git branch -D"
   bn = "!# git switch -c, git bn {branch}, Create a new branch and switch;\n\
        git switch -c"
+  brn = "!# git branch -m, git brn {branch}, Rename the branch;\n\
+        git branch -m"
   st = "!# git stash save -k, git sts {stash}, Save a named stash;\n\
         git stash save -k"
   stp = "!# git stash pop, Pop the stash;\n\
-        git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash pop;"
+        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{print $1}' | xargs git stash pop"
   stx = "!# git stash drop, Drop the stash;\n\
-        git stash list | awk '{gsub(/:/, \"\", $1); print $0}' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{gsub(/:/, \"\", $1); print $1}' | xargs git stash drop;"
+        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{print $1}' | xargs git stash drop"
   plr = "!# git pull --rebase origin {branch};\n\
-        git branch | awk '/^\\*/{print $2}' | xargs git pull --rebase origin"
+        git current-branch | xargs git pull --rebase origin"
   pso = "!# git push origin {branch}, Push to current branch of the origin repo;\n\
-        git branch | awk '/^\\*/{print $2}' | xargs git push origin"
+        git current-branch | xargs git push origin"
   u = "!# git restore --staged, Unstage the staged files\n\
-      git diff --staged --name-only | fzf $FZF_INLINE_OPTS -m | xargs git restore --staged"
+      git diff --staged --name-status | fzf $FZF_INLINE_OPTS -m | awk '{print $2}' | xargs git restore --staged"
   xn = "!# git clean -f --, Discard the changes of the untracked files;\n\
       git status -s | awk '$1 == \"??\" {print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git clean -f --"
   xna = "!# git clean -fd, Discard all untracked changes;\n\
-       git clean -fd --dry-run; read -p \"Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git clean -fd; fi"
+       git clean -fd --dry-run; read -p \"All untracked changes will be lost. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git clean -fd; fi"
   x = "!# git restore, Discard the changes of the tracked files;\n\
        git status -s -uno | awk '{print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git restore"
   xa = "!# git reset --hard, Discard the all tracked changes;\n\
-        read -p \"All tracked changes will be discarded. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git reset --hard; fi"
+        read -p \"All tracked changes will be lost. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git reset --hard; fi"
   r = "!# git rebase -i;\n\
-      git log --pretty=format:'%h: %s' origin/$(git branch --show-current) | fzf $FZF_INLINE_OPTS | awk '{gsub(/: .*/, \"\", $0); print $0}' | xargs -I {} git rebase -i {}^;"
+       git fzf-log | xargs -I {} git rebase -i {}^"
   ron = "!# git rebase --onto;\n\
       git rebase --onto"
   rc = "!# git rebase --continue;\n\
@@ -134,7 +140,7 @@
         git rebase --skip"
   ui = "!ungit"
   rv = "!# git revert;\n\
-        git revert"
+       git fzf-log | xargs git revert"
   cp = "!# git cherry-pick;\n\
         git cherry-pick"
   fo = "!# git fetch origin;\n\
@@ -142,7 +148,7 @@
   dfo = "!# git diff origin;\n\
         git diff origin"
   ignore = "!# generate .gitignore file;\n\
-        curl -sL https://www.toptal.com/developers/gitignore/api/$@"
+           curl -sL https://www.toptal.com/developers/gitignore/api/$@"
 [include]
   path = ~/.delta-themes.gitconfig
 [include]
