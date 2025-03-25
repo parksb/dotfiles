@@ -129,7 +129,9 @@
        git status -s -uno | awk '{print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git restore"
   xa = "!# git reset --hard, Discard the all tracked changes;\n\
         read -p \"All tracked changes will be lost. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git reset --hard; fi"
-  r = "!# git rebase -i;\n\
+  r = "!# git rebase;\n\
+      git rebase"
+  ri = "!# git rebase -i;\n\
        git fzf-log | xargs -I {} git rebase -i {}^"
   ron = "!# git rebase --onto;\n\
       git rebase --onto"
