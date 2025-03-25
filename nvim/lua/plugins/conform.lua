@@ -15,7 +15,9 @@ return {
       rust = require("plugins/langs/rust").conform,
       python = require("plugins/langs/python").conform,
       javascript = require("plugins/langs/javascript").conform,
+      javascriptreact = require("plugins/langs/javascript").conform,
       typescript = require("plugins/langs/typescript").conform,
+      typescriptreact = require("plugins/langs/typescript").conform,
     },
     default_format_opts = {
       lsp_format = "fallback",
