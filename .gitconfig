@@ -16,6 +16,7 @@
   diffFilter = delta --color-only
 [delta]
   navigate = true
+  features = dracula
 [merge]
   conflictstyle = zdiff3
   tool = nvim
