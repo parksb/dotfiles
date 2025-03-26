@@ -92,7 +92,7 @@
   re = "!# git reset;\n\
         git fzf-log-origin | xargs git reset"
   a = "!# git add;\n\
-       git status -s | fzf -m --preview 'git diff {2} | delta' | awk '{print $2}' | xargs git add;"
+       git status -s | fzf -m --preview 'git diff {2} | delta' | awk '{print $NF}' | xargs git add;"
   aa = "!# git add --all;\n\
         git add --all"
   cm = "!# git commit -m, git cm {message};\n\
@@ -120,13 +120,13 @@
   pso = "!# git push origin {branch}, Push to current branch of the origin repo;\n\
         git current-branch | xargs git push origin"
   u = "!# git restore --staged, Unstage the staged files\n\
-      git diff --staged --name-status | fzf $FZF_INLINE_OPTS -m | awk '{print $2}' | xargs git restore --staged"
+      git diff --staged --name-status | fzf $FZF_INLINE_OPTS -m | awk '{print $NF}' | xargs git restore --staged"
   xn = "!# git clean -f --, Discard the changes of the untracked files;\n\
-      git status -s | awk '$1 == \"??\" {print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git clean -f --"
+      git status -s | awk '$1 == \"??\" { $1=\"\"; sub(/^ /, \"\"); print }' | fzf $FZF_INLINE_OPTS -m | xargs git clean -f --"
   xna = "!# git clean -fd, Discard all untracked changes;\n\
        git clean -fd --dry-run; read -p \"All untracked changes will be lost. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git clean -fd; fi"
   x = "!# git restore, Discard the changes of the tracked files;\n\
-       git status -s -uno | awk '{print $2}' | fzf $FZF_INLINE_OPTS -m | xargs git restore"
+       git status -s -uno | awk '{print $NF}' | fzf $FZF_INLINE_OPTS -m | xargs git restore"
   xa = "!# git reset --hard, Discard the all tracked changes;\n\
         read -p \"All tracked changes will be lost. Are you sure? [y/N] \" -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then git reset --hard; fi"
   r = "!# git rebase;\n\
