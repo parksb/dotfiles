@@ -63,7 +63,7 @@
   process = git-lfs filter-process
   required = true
 [alias]
-  log-short = "log --pretty=format:'%h %s'"
+  log-short = "log --pretty=format:'%H \"%s\" (%ar)'"
   current-branch = "branch --show-current"
   fzf-log = "!git log-short | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
   fzf-log-origin = "!git log-short origin/$(git current-branch) | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
