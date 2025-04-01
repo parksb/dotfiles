@@ -1,3 +1,3 @@
 return {
-  conform = { "black" },
+  conform = Workspace.conform("python") or { "black" },
 }

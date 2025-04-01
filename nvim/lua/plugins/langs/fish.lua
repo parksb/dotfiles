@@ -1,3 +1,5 @@
 return {
-  linter = { "fish" },
+  linter = Workspace.linter("fish") or {
+    "fish"
+  }
 }

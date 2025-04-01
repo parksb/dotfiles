@@ -12,5 +12,7 @@ return {
       },
     },
   },
-  conform = { "stylua" },
+  conform = Workspace.conform("lua") or {
+    "stylua",
+  },
 }

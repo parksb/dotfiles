@@ -1,3 +1,3 @@
 return {
-  linter = { "shellcheck" },
+  linter = Workspace.linter("shell-script") or { "shellcheck" },
 }

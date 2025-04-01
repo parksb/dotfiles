@@ -1,8 +1,10 @@
 return {
-  conform = {
+  conform = Workspace.conform("typescript") or {
     "biome",
-    "prettierd",
     "prettier",
     stop_after_first = true,
+  },
+  linter = Workspace.linter("typescript") or {
+    "eslint",
   },
 }
