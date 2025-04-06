@@ -35,8 +35,13 @@ return {
     },
   },
   config = function()
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local lspconfig = require("lspconfig")
+
     local ensure_installed = {
-      lua_ls = require("plugins/langs/lua").lspconfig,
+      lua_ls = {
+        settings = require("plugins/langs/lua").lspconfig,
+      },
       rust_analyzer = {},
       bashls = {},
       clangd = {},
@@ -44,7 +49,13 @@ return {
       css_variables = {},
       dockerls = {},
       html = {},
-      ts_ls = {},
+      ts_ls = {
+        root_dir = lspconfig.util.root_pattern("package.json"),
+        single_file_support = false,
+      },
+      denols = {
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+      },
       jsonls = {},
       marksman = {},
       pyright = {},
@@ -56,11 +67,15 @@ return {
       ensure_installed = vim.tbl_keys(ensure_installed),
     })
 
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    local lspconfig = require("lspconfig")
     require("mason-lspconfig").setup_handlers({
       function(server)
         lspconfig[server].setup({
+          capabilities = vim.deepcopy(capabilities),
+
+          settings = ensure_installed[server].settings,
+          root_dir = ensure_installed[server].root_dir,
+          single_file_support = ensure_installed[server].single_file_support,
+
           on_attach = function(_, buf)
             local opts = function(desc)
               return { noremap = true, silent = true, buffer = buf, desc = desc }
@@ -83,8 +98,6 @@ return {
             vim.keymap.set("n", "<LEADER>rn", vim.lsp.buf.rename, opts("Rename symbol"))
             vim.keymap.set("n", "<LEADER>ca", vim.lsp.buf.code_action, opts("Show code actions"))
           end,
-          capabilities = vim.deepcopy(capabilities),
-          settings = ensure_installed[server],
         })
       end,
     })
