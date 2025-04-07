@@ -2,9 +2,9 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   dependencies = { "MunifTanjim/nui.nvim" },
-  opts = function()
+  config = function()
     local win_width = vim.api.nvim_win_get_width(0)
-    return {
+    require("noice").setup({
       lsp = {
         documentation = {
           opts = {
@@ -17,6 +17,9 @@ return {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
         },
+      },
+      notify = {
+        enabled = true,
       },
       presets = {
         bottom_search = true,
@@ -45,6 +48,15 @@ return {
           opts = { skip = true },
         },
       },
-    }
+    })
+
+    vim.defer_fn(function()
+      if EarlyNotifications then
+        for _, item in ipairs(EarlyNotifications) do
+          vim.notify(item.msg, item.level)
+        end
+        EarlyNotifications = {}
+      end
+    end, 1000)
   end,
 }
