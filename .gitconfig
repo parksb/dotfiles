@@ -10,6 +10,7 @@
   ignorecase = false
   fsmonitor = true
   untrackedcache = true
+  quotepath = false
 [help]
   autocorrect = prompt
 [interactive]
