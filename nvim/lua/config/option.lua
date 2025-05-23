@@ -25,3 +25,4 @@ vim.opt.virtualedit = "block" -- 비주얼 블록 모드에서 텍스트가 없�
 
 vim.opt.encoding = "utf-8"
 vim.opt.fileencodings = { "utf-8" }
+vim.opt.scrolloff = 3
