@@ -9,9 +9,11 @@
 {
   "icon_theme": "Material Icon Theme",
   "agent": {
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
     "model_parameters": [],
     "default_model": {
-      "provider": "copilot_chat",
+      "provider": "zed.dev",
       "model": "claude-sonnet-4"
     },
     "version": "2"
@@ -24,10 +26,10 @@
   "restore_on_startup": "last_workspace",
   "relative_line_numbers": true,
   "use_smartcase_search": true,
-  "ui_font_size": 16,
+  "ui_font_size": 14,
   "ui_font_family": "RobotoMono Nerd Font",
   "ui_font_fallbacks": ["NanumGothicCoding"],
-  "buffer_font_size": 16,
+  "buffer_font_size": 12,
   "buffer_font_family": "RobotoMono Nerd Font",
   "buffer_font_fallbacks": ["NanumGothicCoding"],
   "theme": {

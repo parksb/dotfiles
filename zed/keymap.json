@@ -22,7 +22,10 @@
     "context": "VimControl && !menu",
     "bindings": {
       "space n": "pane::ActivateNextItem",
-      "space p": "pane::ActivatePreviousItem"
+      "space p": "pane::ActivatePreviousItem",
+      "space r n": "editor::Rename",
+      "ctrl-n": "vim::SelectNext",
+      "ctrl-shift-n": "vim::SelectPrevious"
     }
   }
 ]
