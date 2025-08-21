@@ -79,25 +79,22 @@ return {
       vim.lsp.config(server, config)
     end
 
-    vim.keymap.set(
-      "n",
-      "gd",
-      function() Searcher.lsp_search("lsp_definitions", { reuse_win = true, theme = "dropdown" }) end,
-      opts("Go to definition")
-    )
-    vim.keymap.set(
-      "n",
-      "gi",
-      function() Searcher.lsp_search("lsp_implementations", { reuse_win = true, theme = "dropdown" }) end,
-      opts("Go to implementation")
-    )
-    vim.keymap.set(
-      "n",
-      "gr",
-      function() Searcher.lsp_search("lsp_references", { theme = "dropdown" }) end,
-      opts("Go to references")
-    )
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts("Show documentation"))
+    vim.keymap.set("n", "gd", function()
+      Searcher.lsp_search("lsp_definitions", { reuse_win = true, theme = "dropdown" })
+    end, opts("Go to definition"))
+
+    vim.keymap.set("n", "gi", function()
+      Searcher.lsp_search("lsp_implementations", { reuse_win = true, theme = "dropdown" })
+    end, opts("Go to implementation"))
+
+    vim.keymap.set("n", "gr", function()
+      Searcher.lsp_search("lsp_references", { theme = "dropdown" })
+    end, opts("Go to references"))
+
+    vim.keymap.set("n", "K", function()
+      vim.lsp.buf.hover({ border = "single" })
+    end, opts("Show documentation"))
+
     vim.keymap.set("n", "X", vim.diagnostic.open_float, opts("Show diagnostics"))
     vim.keymap.set("n", "<LEADER>rn", vim.lsp.buf.rename, opts("Rename symbol"))
     vim.keymap.set("n", "<LEADER>ca", vim.lsp.buf.code_action, opts("Show code actions"))
