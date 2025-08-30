@@ -50,7 +50,7 @@ return {
       css_variables = {},
       dockerls = {},
       html = {},
-      ts_ls = {
+      vtsls = {
         root_dir = function(_, callback)
           local deno_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" })
           local root_dir = vim.fs.root(0, { "tsconfig.json", "jsconfig.json", "package.json" })
