@@ -1,5 +1,15 @@
 return {
   lsp = {
+    ts_ls = {
+      root_dir = function(_, callback)
+        local root_dir = vim.fs.root(0, { "tsconfig.json", "jsconfig.json", "package.json" })
+        local deno_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" })
+        if root_dir and deno_dir == nil then
+          callback(root_dir)
+        end
+      end,
+      root_markers = { "tsconfig.json", "jsconfig.json", "package.json" },
+    },
     vtsls = {
       settings = {
         vtsls = {},
