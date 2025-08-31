@@ -40,9 +40,7 @@ return {
     end
 
     local servers = {
-      lua_ls = {
-        settings = require("plugins/langs/lua").lspconfig,
-      },
+      lua_ls = require("plugins/langs/lua").lsp.lua_ls,
       rust_analyzer = {},
       bashls = {},
       clangd = {},
@@ -50,25 +48,8 @@ return {
       css_variables = {},
       dockerls = {},
       html = {},
-      vtsls = {
-        root_dir = function(_, callback)
-          local deno_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" })
-          local root_dir = vim.fs.root(0, { "tsconfig.json", "jsconfig.json", "package.json" })
-          if root_dir and deno_dir == nil then
-            callback(root_dir)
-          end
-        end,
-        root_markers = { "tsconfig.json", "jsconfig.json", "package.json" },
-      },
-      denols = {
-        root_dir = function(_, callback)
-          local root_dir = vim.fs.root(0, { "deno.json", "deno.jsonc" })
-          if root_dir then
-            callback(root_dir)
-          end
-        end,
-        root_markers = { "deno.json", "deno.jsonc" },
-      },
+      vtsls = require("plugins/langs/typescript").lsp.vtsls,
+      denols = require("plugins/langs/typescript").lsp.denols,
       jsonls = {},
       marksman = {},
       pyright = {},
