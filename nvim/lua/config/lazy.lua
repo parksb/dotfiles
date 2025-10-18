@@ -19,4 +19,6 @@ require("lazy").setup({
     { import = "plugins" },
   },
   checker = { enabled = true },
+}, {
+  dir = "~/projects",
 })
