@@ -52,7 +52,7 @@ return {
       ts_ls = require("plugins/langs/typescript").lsp.ts_ls,
       denols = require("plugins/langs/typescript").lsp.denols,
       jsonls = {},
-      marksman = {},
+      marksman = require("plugins/langs/markdown").lsp.marksman,
       pyright = {},
       yamlls = {},
     }
