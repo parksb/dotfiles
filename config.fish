@@ -163,6 +163,7 @@ fish_add_path_if_exists $HOME/bin
 # to erase one: `fish_user_path erase`
 
 # env variables
+if type -q difft; set -gx DFT_COLOR always; end
 if type -q bat; set -gx BAT_THEME Dracula; end
 if type -q nvim; set -gx EDITOR nvim; end
 if test -e $HOME/projects; set -gx PROJECT_DIR $HOME/projects; end

@@ -31,8 +31,12 @@
   enabled = true
   autoupdate = true
 [diff]
+  external = difft
   colorMoved = default
   algorithm = histogram
+[pager]
+  diff = less -RF
+  show = less -RF
 [commit]
   template = ~/.stCommitMsg
   gpgSign = true
@@ -58,16 +62,11 @@
   defaultBranch = main
 [gpg]
   format = ssh
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
 [alias]
   log-short = "log --pretty=format:'%H \"%s\" (%ar)'"
   current-branch = "branch --show-current"
-  fzf-log = "!git log-short | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
-  fzf-log-origin = "!git log-short origin/$(git current-branch) | fzf $FZF_INLINE_OPTS --preview 'git show --pretty=short {1} | delta' | awk '{print $1}'"
+  fzf-log = "!git log-short | fzf $FZF_INLINE_OPTS --preview 'DFT_WIDTH=$FZF_PREVIEW_COLUMNS git show --pretty=short {1}' | awk '{print $1}'"
+  fzf-log-origin = "!git log-short origin/$(git current-branch) | fzf $FZF_INLINE_OPTS --preview 'DFT_WIDTH=$FZF_PREVIEW_COLUMNS git show --pretty=short {1}' | awk '{print $1}'"
   alias = "!# Show all aliases;\n\
     git config --list \
     | egrep '^alias.+' \
@@ -93,7 +92,7 @@
   re = "!# git reset;\n\
         git fzf-log-origin | xargs git reset"
   a = "!# git add;\n\
-       git status -s | fzf -m --preview 'git diff {2} | delta' | awk '{print $NF}' | xargs git add;"
+       git status -s | fzf -m --preview 'DFT_WIDTH=$FZF_PREVIEW_COLUMNS git diff {2}' | awk '{print $NF}' | xargs git add;"
   aa = "!# git add --all;\n\
         git add --all"
   cm = "!# git commit -m, git cm {message};\n\
@@ -113,9 +112,9 @@
   st = "!# git stash save -k, git sts {stash}, Save a named stash;\n\
         git stash save -k"
   stp = "!# git stash pop, Pop the stash;\n\
-        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{print $1}' | xargs git stash pop"
+        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'DFT_WIDTH=$FZF_PREVIEW_COLUMNS git stash show -p {1}' | awk '{print $1}' | xargs git stash pop"
   stx = "!# git stash drop, Drop the stash;\n\
-        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'git stash show -p {1} | head -n 1000 | delta' | awk '{print $1}' | xargs git stash drop"
+        git stash list  --format='%gd %h %s' | fzf $FZF_INLINE_OPTS --preview 'DFT_WIDTH=$FZF_PREVIEW_COLUMNS git stash show -p {1}' | awk '{print $1}' | xargs git stash drop"
   plr = "!# git pull --rebase origin {branch};\n\
         git current-branch | xargs git pull --rebase origin"
   pso = "!# git push origin {branch}, Push to current branch of the origin repo;\n\
