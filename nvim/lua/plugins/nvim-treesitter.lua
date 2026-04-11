@@ -1,57 +1,61 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = { "nvim-treesitter/nvim-treesitter-refactor" },
-    build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        ensure_installed = {
-          "c",
-          "bash",
-          "comment",
-          "cpp",
-          "css",
-          "diff",
-          "dockerfile",
-          "fish",
-          "git_config",
-          "git_rebase",
-          "gitcommit",
-          "gitignore",
-          "html",
-          "javascript",
-          "json",
-          "latex",
-          "make",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "regex",
-          "rust",
-          "scss",
-          "sql",
-          "rust",
-          "toml",
-          "tsx",
-          "typescript",
-          "vim",
-          "vimdoc",
-          "yaml",
-        },
-        sync_install = false,
-        auto_install = true,
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-        refactor = {
-          highlight_definitions = {
-            enable = true,
-            clear_on_cursor_move = true,
-          },
-        },
+    branch = "main",
+    init = function()
+      local ensure_installed = {
+        "c",
+        "bash",
+        "comment",
+        "cpp",
+        "css",
+        "diff",
+        "dockerfile",
+        "fish",
+        "git_config",
+        "git_rebase",
+        "gitcommit",
+        "gitignore",
+        "html",
+        "javascript",
+        "json",
+        "latex",
+        "make",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "regex",
+        "rust",
+        "scss",
+        "sql",
+        "rust",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
+      }
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          -- Enable treesitter highlighting and disable regex syntax
+          pcall(vim.treesitter.start)
+
+          -- Enable treesitter-based indentation
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
       })
+
+      local already_installed = require("nvim-treesitter.config").get_installed()
+      local parsers_to_install = vim
+        .iter(ensure_installed)
+        :filter(function(parser)
+          return not vim.tbl_contains(already_installed, parser)
+        end)
+        :totable()
+
+      require("nvim-treesitter").install(parsers_to_install)
     end,
   },
 }
