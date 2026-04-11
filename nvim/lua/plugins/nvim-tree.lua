@@ -26,6 +26,9 @@ return {
       enable = true,
       show_on_dirs = true,
     },
+    view = {
+      relativenumber = true,
+    },
     git = {
       ignore = false,
     },
